@@ -1,0 +1,83 @@
+apply plugin: 'groovy'
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    compile("org.springframework.boot:spring-boot-starter-data-rest")
+    compile("org.springframework.boot:spring-boot-starter-security")
+    compile("org.springframework.boot:spring-boot-starter-test")
+    compile("org.springframework:spring-tx")
+    compile("org.codehaus.groovy:groovy-all:2.3.11")
+    compile("org.apache.tomcat.embed:tomcat-embed-jasper")
+    compile("org.hibernate:hibernate-core:5.0.6.Final")
+    compile("org.hibernate:hibernate-entitymanager:5.0.6.Final")
+    compile("com.google.code.gson:gson:2.3.1")
+    compile("ma.glasnost.orika:orika-core:1.5.1")
+    compile("com.h2database:h2")
+    //compile("org.apache.logging.log4j:log4j-api")
+    //compile("org.slf4j:slf4j-api:1.7.25")
+    //compile("org.slf4j:slf4j-log4j12:1.7.25")
+
+
+    testCompile("org.mockito:mockito-all:1.10.19")
+    testCompile("com.jayway.jsonpath:json-path:2.4.0")
+}
+
+buildscript {
+    ext {
+        springBootVersion = '2.0.0.M2'
+    }
+    repositories {
+        mavenCentral()
+        maven { url "https://repo.spring.io/snapshot" }
+        maven { url "https://repo.spring.io/milestone" }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+
+
+idea {
+    module {
+        inheritOutputDirs = false
+        outputDir = file("$buildDir/classes/main/")
+        testOutputDir = file("$buildDir/classes/test/")
+    }
+}
+
+jar {
+    baseName = 'payment-demo'
+    version = '0.0.1-SNAPSHOT'
+}
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+
+ext {
+    mockitoVersion = '1.10.19'
+    jsonPathVersion ='2.4.0'
+    gsonVersion = '2.3.1'
+    logbackVersion = '1.2.3'
+    slf4jVersion = '1.7.25'
+    orikaVersion = '1.5.1'
+}
+
+repositories {
+    mavenCentral()
+    maven { url "https://repo.spring.io/snapshot" }
+    maven { url "https://repo.spring.io/milestone" }
+}
+
+
+
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.0.1'
+}
