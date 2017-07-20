@@ -1,10 +1,12 @@
 package org.payment.api;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.payment.data.entities.ClientRole;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Set;
 
 /**
  * @author caroline
@@ -27,9 +29,7 @@ public class Client implements Serializable {
     @NotEmpty
     private String password;
 
-    @NotNull
-    @NotEmpty
-    private String role;
+    private Set<String> roles;
 
     public Long getClientId() {
         return clientId;
@@ -55,5 +55,11 @@ public class Client implements Serializable {
         this.password = password;
     }
 
+    public Set<String> getRoles() {
+        return roles;
+    }
 
+    public void setRoles(Set<String> roles) {
+        this.roles = roles;
+    }
 }

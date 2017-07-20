@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment Demo</title>
+
+
+    <script src="/scripts/libs/bower_components/angular/angular.min.js" type="application/javascript"></script>
+    <script src="/scripts/libs/bower_components/ngstorage/ngStorage.min.js" type="application/javascript"></script>
+    <script src="/scripts/libs/bower_components/angular-route/angular-route.min.js" type="application/javascript"></script>
+    <script src="/scripts/libs/bower_components/angular-cookies/angular-cookies.min.js" type="application/javascript"></script>
+    <script src="/scripts/libs/bower_components/angular-ui-router/release/angular-ui-router.min.js" type="application/javascript"></script>
+    <script src="/scripts/libs/bower_components/angular-resource/angular-resource.min.js" type="application/javascript"></script>
+
+    <script src="/scripts/app.js" type="application/javascript"></script>
+    <script src="/scripts/controllers/loginPageController.js" type="application/javascript"></script>
+
+    <!-- Bootstrap dependencies -->
+
+    <script src="/scripts/libs/bower_components/angular-bootstrap/ui-bootstrap.min.js" type="application/javascript"></script>
+    <script src="/scripts/libs/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js" type="application/javascript"></script>
+    <link rel="stylesheet" href="/scripts/libs/bower_components/angular-bootstrap/ui-bootstrap-csp.css">
+    <link rel="stylesheet" href="/scripts/libs/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/scripts/libs/bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+
+</head>
+
+<body ng-app="myApp" ng-controller="LoginPageController as loginPgCtrl" >
+
+<div class="page-header">
+    <h1>Login</h1>
+</div>
+<div class="alert alert-danger" ng-show="error" translate>
+    Login Error
+</div>{{controller.error}}
+
+<form method="POST" action="login" name="f">
+    <div class="form-group">
+        <label>Username</label>
+        <input type="text" class="form-control" name="username"/>
+    </div>
+    <div class="form-group">
+        <label>Password</label>
+        <input type="password" class="form-control" name="password">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<h1>New User</h1>
+<form id="userEditForm" name="userEditForm" ng-submit="save()" autocomplete="false">
+    <input type="hidden" name="id" ng-model="editedUser.id">
+    <div class="modal-header">
+        <h3 class="modal-title">
+            <div class="animate-switch" ng-if="!editedUser.id" translate>user.pages.edit.headers.newUser</div>
+            <div class="animate-switch" ng-if="editedUser.id" translate>user.pages.edit.headers.editUser</div>
+        </h3>
+    </div>
+    <div class="modal-body" ng-show="editedUser">
+        <div class="form-group" ng-hide="editedUser.id">
+            <label for="userNameInput">Username</label>
+            <input type="text" class="form-control" id="userNameInput" ng-model="editedUser.username">
+            <div field-validation-error-place-holder error="errors.fieldErrors.userName"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="passwordInput">Password</label>
+            <input type="password"  class="form-control" id="passwordInput" ng-model="editedUser.password">
+            <div field-validation-error-place-holder error="errors.fieldErrors.password"></div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="saveUser()" translate>Add User</button>
+        <button class="btn btn-warning" ng-click="cancel()" translate>Cancel</button>
+    </div>
+</form>
+
+</body>
+</html>

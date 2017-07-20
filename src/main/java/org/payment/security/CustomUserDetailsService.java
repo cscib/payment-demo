@@ -30,6 +30,8 @@ public class CustomUserDetailsService implements UserDetailsService {
     public User loadUserByUsername(String username) throws UsernameNotFoundException {
         Collection<GrantedAuthority> authorities = new ArrayList<>();
 
+        //log.info(String.format("User Credentials loading from DB: %s", userCredentials));
+        System.out.println("User Credentials loading from DB");
 
         Client user = clientRepository.findByUsername(username);
         if (user == null) {
