@@ -6,6 +6,7 @@ import ma.glasnost.orika.MappingContext;
 import ma.glasnost.orika.impl.ConfigurableMapper;
 import org.payment.data.entities.Client;
 import org.payment.data.entities.ClientRole;
+import org.payment.data.entities.CreditCardDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -25,15 +26,29 @@ public class ModelMapper extends ConfigurableMapper {
 
     public void configure(MapperFactory factory) {
         super.configure(factory);
-//
-//        factory.registerClassMap(factory.classMap(CreditCardDetails.class, org.payment.api.CreditCardDetails.class)
-//                .customize(new CustomMapper<CreditCardDetails, org.payment.api.CreditCardDetails>() {
-//                    @Override
-//                    public void mapAtoB(CreditCardDetails account, org.payment.api.CreditCardDetails apiAccount, MappingContext context) {
-//                        apiAccount.setAccountNumber(account.getId());
-//                    }
-//                }).byDefault().toClassMap());
-//
+
+        factory.registerClassMap(factory.classMap(CreditCardDetails.class, org.payment.api.CreditCardDetails.class)
+                .customize(new CustomMapper<CreditCardDetails, org.payment.api.CreditCardDetails>() {
+                    @Override
+                    public void mapAtoB(CreditCardDetails account, org.payment.api.CreditCardDetails apiAccount, MappingContext context) {
+                        apiAccount.setCcNumber(account.getCcNumber());
+                        apiAccount.setCcType(account.getCcType());
+                        apiAccount.setClient(account.getClient());
+                        apiAccount.setExpiryDate(account.getExpiryDate());
+                    }
+                }).byDefault().toClassMap());
+
+        factory.registerClassMap(factory.classMap(org.payment.api.CreditCardDetails.class, CreditCardDetails.class )
+                .customize(new CustomMapper<org.payment.api.CreditCardDetails, CreditCardDetails>() {
+                    @Override
+                    public void mapAtoB(org.payment.api.CreditCardDetails apiAccount, CreditCardDetails account,   MappingContext context) {
+                        account.setCcNumber(apiAccount.getCcNumber());
+                        account.setCcType(apiAccount.getCcType());
+                        account.setClient(apiAccount.getClient());
+                        account.setExpiryDate(apiAccount.getExpiryDate());
+                    }
+                }).byDefault().toClassMap());
+
 
         factory.registerClassMap(factory.classMap(Client.class, org.payment.api.Client.class)
                 .customize(new CustomMapper<Client, org.payment.api.Client>() {

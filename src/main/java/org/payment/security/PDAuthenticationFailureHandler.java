@@ -24,7 +24,7 @@ public class PDAuthenticationFailureHandler implements AuthenticationFailureHand
                                         org.springframework.security.core.AuthenticationException exception)
             throws IOException, ServletException {
 
-        response.sendRedirect(request.getContextPath());
+        response.sendRedirect("login.html?error=true");
     }
 
 }

@@ -10,14 +10,26 @@ import javax.persistence.*;
 @Table(name = "client_role")
 public class ClientRole {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
     /** The user. */
     @ManyToOne(optional = false, fetch=FetchType.EAGER)
     @JoinColumn(name="client_id",referencedColumnName = "id")
     private Client client;
 
-    @Id
+    @Basic
     @Column(name = "role_name")
     private String roleName;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getRoleName() {
         return roleName;
@@ -42,6 +54,7 @@ public class ClientRole {
 
         ClientRole role = (ClientRole) o;
 
+        if (id != null ? !id.equals(role.id) : role.id != null) return false;
         if (role != null ? !roleName.equals(role.roleName) : role.roleName != null) return false;
 
         return true;
@@ -49,7 +62,8 @@ public class ClientRole {
 
     @Override
     public int hashCode() {
-        int result = roleName != null ? roleName.hashCode() : 0;
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (roleName != null ? roleName.hashCode() : 0);
         return result;
     }
 

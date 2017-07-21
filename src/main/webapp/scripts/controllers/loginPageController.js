@@ -14,12 +14,16 @@ controllers.controller("LoginPageController", ['$rootScope', '$scope', '$http', 
               method: 'POST',
               url: '/api/payment-system/clients/',
               data: $scope.editedUser,
-          }).then(function (error){
-              $scope.errors = error;
-          },function (success){
+          }).then(function (success){
               $scope.errors = {};
+              $scope.errorMsg = null;
               $modalInstance.dismiss('cancel');
               onSuccess();
+          },function (error){
+               $scope.errors = error;
+               if (error.data != null && error.data != undefined) {
+                $scope.errorMsg = "Error on adding user: " + error.data.message;
+               }
           })
       };
 

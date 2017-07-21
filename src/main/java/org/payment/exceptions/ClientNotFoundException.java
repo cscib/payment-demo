@@ -10,4 +10,7 @@ public class ClientNotFoundException extends IllegalArgumentException {
         super("Client with id " + clientId + "not found");
     }
 
+    public ClientNotFoundException(String username) {
+        super("Client with id " + username + "not found");
+    }
 }

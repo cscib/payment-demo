@@ -7,17 +7,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
 /**
  * Created by caroline on 7/17/17.
  */
+@RestController
+@RequestMapping("/api/payment-system")
 public class CreditCardController {
 
 
     @Autowired
-    ClientService clientService;
+    private ClientService clientService;
 
     /**
      * Creates credit card details
@@ -25,7 +28,7 @@ public class CreditCardController {
      * @return Created client details
      */
     @RequestMapping(value = "/creditcard", method = RequestMethod.POST)
-    public Client createOrUpdateCreditCard(@Valid @RequestBody CreditCardDetails creditCardDetails) {
+    public CreditCardDetails createOrUpdateCreditCard(@Valid @RequestBody CreditCardDetails creditCardDetails) {
         return clientService.createOrUpdateCreditCard(creditCardDetails);
     }
 

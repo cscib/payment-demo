@@ -18,6 +18,6 @@ import java.io.IOException;
 public class PDAuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException, IOException {
-        getRedirectStrategy().sendRedirect(request, response, getDefaultTargetUrl());
+        getRedirectStrategy().sendRedirect(request, response, "/views/home.html");
     }
 }

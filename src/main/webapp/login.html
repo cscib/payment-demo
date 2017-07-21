@@ -46,14 +46,9 @@
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 <h1>New User</h1>
+<h4 style="color:red">{{errorMsg}}</h4>
 <form id="userEditForm" name="userEditForm" ng-submit="save()" autocomplete="false">
     <input type="hidden" name="id" ng-model="editedUser.id">
-    <div class="modal-header">
-        <h3 class="modal-title">
-            <div class="animate-switch" ng-if="!editedUser.id" translate>user.pages.edit.headers.newUser</div>
-            <div class="animate-switch" ng-if="editedUser.id" translate>user.pages.edit.headers.editUser</div>
-        </h3>
-    </div>
     <div class="modal-body" ng-show="editedUser">
         <div class="form-group" ng-hide="editedUser.id">
             <label for="userNameInput">Username</label>
@@ -68,8 +63,8 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-primary" ng-click="saveUser()" translate>Add User</button>
-        <button class="btn btn-warning" ng-click="cancel()" translate>Cancel</button>
+        <button class="btn btn-primary" ng-click="saveUser()">Add User</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
     </div>
 </form>
 

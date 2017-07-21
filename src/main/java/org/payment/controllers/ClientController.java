@@ -1,7 +1,6 @@
 package org.payment.controllers;
 
 
-import org.payment.api.Account;
 import org.payment.api.Client;
 import org.payment.api.CreditCardDetails;
 import org.payment.services.ClientService;
@@ -34,16 +33,6 @@ public class ClientController {
 
 
     /**
-     * Returns a client for a given client id
-     * @param clientId - Client id which to retrieve
-     * @return Client Details within the system
-     */
-    @RequestMapping(value = "/clients/{clientId}", method = RequestMethod.GET)
-    public Client getClient(@PathVariable Long clientId) {
-        return clientService.getClient(clientId);
-    }
-
-    /**
      * Returns all the accounts for a given client id
      * @param clientId - Client id with which to search for
      * @return List of accounts for the given client
@@ -51,5 +40,15 @@ public class ClientController {
     @RequestMapping(value = "/clients/{clientId}/creditcarddetails", method = RequestMethod.GET)
     public List<CreditCardDetails> getClientCreditCardDetails(@PathVariable Long clientId) {
         return clientService.getCreditCardDetailsForClient(clientId);
+    }
+
+    /**
+     * Returns all the accounts for a given client id
+     * @param username - username with which to search for
+     * @return List of accounts for the given client
+     */
+    @RequestMapping(value = "/clients/{username}/creditcarddetails", method = RequestMethod.GET)
+    public List<CreditCardDetails> getUsernameCreditCardDetails(@PathVariable String username) {
+        return clientService.getCreditCardDetailsForClient(username);
     }
 }

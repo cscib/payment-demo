@@ -1,5 +1,7 @@
 package org.payment.api;
 
+import org.payment.data.entities.*;
+import org.payment.data.entities.Client;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
@@ -35,7 +37,7 @@ public class CreditCardDetails  implements Serializable {
     private Date expiryDate;
 
     @NotNull
-    private Long accountNumber;
+    private Client client;
 
     public long getId() {
         return id;
@@ -69,11 +71,11 @@ public class CreditCardDetails  implements Serializable {
         this.expiryDate = expiryDate;
     }
 
-    public Long getAccountNumber() {
-        return accountNumber;
+    public Client getClient() {
+        return client;
     }
 
-    public void setAccountNumber(Long accountNumber) {
-        this.accountNumber = accountNumber;
+    public void setClient(Client client) {
+        this.client = client;
     }
 }
