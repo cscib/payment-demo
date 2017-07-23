@@ -53,9 +53,6 @@ controllers.controller("HomeController",
           })
     };
 
-      $scope.cancel = function () {
-          $modalInstance.dismiss('cancel');
-      };
 
      /**
        * Wrapper function to show alert in settings page
