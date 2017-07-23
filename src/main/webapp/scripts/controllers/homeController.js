@@ -41,10 +41,12 @@ controllers.controller("HomeController",
           }).then(function (success){
                 $scope.errors = {};
                 $scope.successMsg = "Credit card created / modified successfully"
+                $scope.errorMsg = null;
                 $scope.ccEditForm = {};
                 loadCreditCards();
           },function (error){
                 $scope.errors = error;
+                $scope.successMsg = null;
                 $scope.errorMsg = "Form error, please check your input and try again.";
                                 if (error != null && error.data != null && error.data.defaultMessage != null) {
                                     $scope.errorMsg = error.data.defaultMessage;

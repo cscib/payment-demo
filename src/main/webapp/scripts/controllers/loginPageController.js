@@ -11,7 +11,8 @@ controllers.controller("LoginPageController", ['$rootScope', '$scope', '$http', 
           }).then(function (success){
               $scope.errors = {};
               $scope.editedUser = {};
-              $scope.successMsg = "User create successfully, please login"
+              $scope.successMsg = "User create successfully, please login";
+              $scope.errorMsg = null;
           },function (error){
                $scope.errors = error;
                $scope.successMsg = null;

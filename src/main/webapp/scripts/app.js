@@ -23,14 +23,5 @@ app.config(function ($routeProvider, $httpProvider) {
         controllerAs: 'controller',
         activeTab: 'login'
     })
- //   .when('/users', {
-//        templateUrl: 'user/user_list.html',
-//        controller: 'UserOverviewController',
-//        controllerAs: 'controller'
-//    }).when('/users/edit', {
-//        templateUrl: 'user/user_edit.html',
-//        controller: 'UserEditController',
-//        controllerAs: 'controller'
-//    })
     .otherwise('/');
     });
