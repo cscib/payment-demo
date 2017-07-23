@@ -1,6 +1,7 @@
 package org.payment.api;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.validator.constraints.CreditCardNumber;
 import org.springframework.format.annotation.DateTimeFormat;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
@@ -18,6 +19,7 @@ public class CreditCardDetails  implements Serializable {
 
     private long id;
 
+    @CreditCardNumber(message = "Credit card number is invalid. Luhn test Failed.")
     @NotNull(message = "Invalid credit card number")
     private String ccNumber;
 

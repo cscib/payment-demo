@@ -17,10 +17,10 @@ controllers.controller("LoginPageController", ['$rootScope', '$scope', '$http', 
           }).then(function (success){
               $scope.errors = {};
               $scope.errorMsg = null;
-              //$modalInstance.dismiss('cancel');
-              //onSuccess();
+              $scope.successMsg = "User create successfully, please login"
           },function (error){
                $scope.errors = error;
+               $scope.successMsg = null;
                if (error.data != null && error.data != undefined) {
                 $scope.errorMsg = "Error on adding user: " + error.data.message;
                }

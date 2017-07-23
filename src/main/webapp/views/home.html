@@ -28,6 +28,19 @@
 
 <body ng-app="myApp" ng-controller="HomeController as homeCtrl" >
 
+<ul class="nav nav-pills navbar-inverse" role="tablist">
+    <li ng-class="{active: $route.current.activeTab == 'home'}">
+        <a href="#/"><span class="glyphicon glyphicon-home"></span>Home</a>
+    </li>
+    <li ng-show="!model.authdetails.principal" ng-class="{active: $route.current.activeTab == 'login'}">
+        <a href="/login.html"><span class="glyphicon glyphicon-log-in"></span>Login</a>
+    </li>
+    <li ng-show="model.authdetails.principal">
+        <a href="/logout"><span class="glyphicon glyphicon-log-out"></span>Logout</a>
+    </li>
+</ul>
+
+
 <div style="text-align: center">
     <b ng-show="model.authdetails.principal">
         <h1>
@@ -61,7 +74,6 @@
         <h1>Add Credit Card</h1>
         <h4 style="color:red">{{errorMsg}}</h4>
         <form id="ccEditForm" name="ccEditForm" autocomplete="false">
-            <input type="hidden" name="id" ng-model="ccEditForm.id">
             <div class="modal-body" ng-show="ccEditForm">
 
                 <div class="form-group">
