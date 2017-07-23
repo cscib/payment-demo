@@ -17,8 +17,8 @@ controllers.controller("LoginPageController", ['$rootScope', '$scope', '$http', 
           }).then(function (success){
               $scope.errors = {};
               $scope.errorMsg = null;
-              $modalInstance.dismiss('cancel');
-              onSuccess();
+              //$modalInstance.dismiss('cancel');
+              //onSuccess();
           },function (error){
                $scope.errors = error;
                if (error.data != null && error.data != undefined) {

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 /**
  * Created by caroline on 7/17/17.
@@ -22,13 +23,14 @@ public class CreditCardController {
     @Autowired
     private ClientService clientService;
 
-    /**
+    /**C
      * Creates credit card details
      * @param creditCardDetails - Credit card details
      * @return Created client details
      */
     @RequestMapping(value = "/creditcard", method = RequestMethod.POST)
-    public CreditCardDetails createOrUpdateCreditCard(@Valid @RequestBody CreditCardDetails creditCardDetails) {
+    public CreditCardDetails createOrUpdateCreditCard(@Valid @RequestBody CreditCardDetails creditCardDetails, Principal principal) {
+        creditCardDetails.setUsername(principal.getName());
         return clientService.createOrUpdateCreditCard(creditCardDetails);
     }
 

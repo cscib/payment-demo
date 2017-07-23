@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 
 /**
@@ -22,6 +23,17 @@ public class ClientController {
     ClientService clientService;
 
     /**
+     * Get principal in the Payment system
+     * @param principal - Principal details required for registration
+     * @return Created client details
+     */
+    @RequestMapping(value = "/auth", method = RequestMethod.GET)
+    public Principal getPrincipal(Principal principal) {
+        return principal;
+    }
+
+
+    /**
      * Creates a client in the Payment system
      * @param client - Client details required for registration
      * @return Created client details
@@ -31,24 +43,13 @@ public class ClientController {
         return clientService.createClient(client);
     }
 
-
-    /**
-     * Returns all the accounts for a given client id
-     * @param clientId - Client id with which to search for
-     * @return List of accounts for the given client
-     */
-    @RequestMapping(value = "/clients/{clientId}/creditcarddetails", method = RequestMethod.GET)
-    public List<CreditCardDetails> getClientCreditCardDetails(@PathVariable Long clientId) {
-        return clientService.getCreditCardDetailsForClient(clientId);
-    }
-
     /**
      * Returns all the accounts for a given client id
      * @param username - username with which to search for
      * @return List of accounts for the given client
      */
-    @RequestMapping(value = "/clients/{username}/creditcarddetails", method = RequestMethod.GET)
-    public List<CreditCardDetails> getUsernameCreditCardDetails(@PathVariable String username) {
-        return clientService.getCreditCardDetailsForClient(username);
+    @RequestMapping(value = "/clients/creditcarddetails", method = RequestMethod.GET)
+    public List<CreditCardDetails> getUsernameCreditCardDetails(Principal principal) {
+        return clientService.getCreditCardDetailsForClient(principal.getName());
     }
 }

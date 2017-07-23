@@ -16,7 +16,7 @@ public class CreditCardDetails {
     private Long id;
 
     @Basic
-    @Column(name = "ccNumber")
+    @Column(name = "ccNumber", unique = true)
     private String ccNumber;
 
     @Basic

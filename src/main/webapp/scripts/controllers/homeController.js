@@ -1,24 +1,39 @@
 controllers.controller("HomeController",
-    ['$scope', '$http', '$sessionStorage',function ( $scope, $http, $sessionStorage) {
+    ['$scope', '$http',function ( $scope, $http) {
 
-    $scope.$storage = $sessionStorage;
+   // $scope.$storage = $sessionStorage;
+
 
     $scope.model = {};
 
-    $http({
-            method: 'GET',
-            url: '/api/payment-system/clients/{username}/creditcarddetails/',
-            params: {}
-        }).then(function (success){
-              $scope.errors = {};
-              $scope.errorMsg = null;
-            $scope.model.ccdetails = success.data;
-        },function (error){
-            $scope.errors = error;
-            if (error.data != null && error.data != undefined) {
-                $scope.errorMsg = "Error on adding credit card details: " + success.data.message;
-            }
-        })
+
+        $http({
+                method: 'GET',
+                url: '/api/payment-system/auth/',
+                params: {}
+            }).then(function (success){
+                  $scope.errors = {};
+                  $scope.errorMsg = null;
+                $scope.model.authdetails = success.data;
+            },function (error){
+                $scope.model.authdetails = null;
+            })
+
+        $http({
+                method: 'GET',
+                url: '/api/payment-system/clients/creditcarddetails/',
+                params: {}
+            }).then(function (success){
+                  $scope.errors = {};
+                  $scope.errorMsg = null;
+                $scope.model.ccdetails = success.data;
+            },function (error){
+                $scope.errors = error;
+                if (error.data != null && error.data != undefined) {
+                    $scope.errorMsg = "Error on adding credit card details: " + error.data.message;
+                }
+            })
+
 
     $scope.saveCreditCard = function () {
 
@@ -26,12 +41,11 @@ controllers.controller("HomeController",
               method: 'POST',
               url: '/api/payment-system/creditcard/',
               data: $scope.ccEditForm,
-          }).then(function (error){
-              $scope.errors = error;
-          },function (success){
-              $scope.errors = {};
-              $modalInstance.dismiss('cancel');
-              onSuccess();
+          }).then(function (success){
+                $scope.errors = {};
+                //onSuccess();
+          },function (error){
+                $scope.errors = error;
           })
     };
 

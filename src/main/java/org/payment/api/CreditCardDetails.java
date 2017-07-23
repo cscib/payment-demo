@@ -1,13 +1,7 @@
 package org.payment.api;
 
-import org.payment.data.entities.*;
-import org.payment.data.entities.Client;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
-
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -21,23 +15,22 @@ public class CreditCardDetails  implements Serializable {
 
 
     private static final long serialVersionUID = 3307171249247060887L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+
     private long id;
+
     @NotNull(message = "Invalid credit card number")
     private String ccNumber;
 
-    @Column
     @NotNull(message = "Credit card type cannot be empty")
     private String ccType;
 
     @NotNull(message = "Invalid credit card expiry date")
-    @DateTimeFormat(pattern="MM/yyyy")
-    @Future(message = "Credit card is expired")
+    @JsonFormat(pattern="MM/yyyy")
+    //@Future(message = "Credit card is expired")
     private Date expiryDate;
 
-    @NotNull
-    private Client client;
+    private String username;
+
 
     public long getId() {
         return id;
@@ -71,11 +64,11 @@ public class CreditCardDetails  implements Serializable {
         this.expiryDate = expiryDate;
     }
 
-    public Client getClient() {
-        return client;
+    public String getUsername() {
+        return username;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

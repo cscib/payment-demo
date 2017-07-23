@@ -87,7 +87,7 @@ public class ClientServiceImpl implements ClientService{
     }
 
     @Override
-    public CreditCardDetails createOrUpdateCreditCard(CreditCardDetails creditCardDetails) {
+    public CreditCardDetails createOrUpdateCreditCard(CreditCardDetails creditCardDetails) throws ClientNotFoundException {
 
         org.payment.data.entities.CreditCardDetails creditCardDetailsSaved = creditCardRepository.findByCcNumber(creditCardDetails.getCcNumber());
 
@@ -95,7 +95,14 @@ public class ClientServiceImpl implements ClientService{
             creditCardDetailsSaved = new org.payment.data.entities.CreditCardDetails();
         }
 
+        org.payment.data.entities.Client client = clientRepository.findByUsername(creditCardDetails.getUsername());
+
+        if (client == null) {
+            throw new ClientNotFoundException(creditCardDetails.getUsername());
+        }
+
         modelMapper.map(creditCardDetails, creditCardDetailsSaved);
+        creditCardDetailsSaved.setClient(client);
         creditCardDetailsSaved = creditCardRepository.save(creditCardDetailsSaved);
         modelMapper.map(creditCardDetailsSaved, creditCardDetails);
 

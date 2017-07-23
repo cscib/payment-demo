@@ -33,8 +33,8 @@ public class ModelMapper extends ConfigurableMapper {
                     public void mapAtoB(CreditCardDetails account, org.payment.api.CreditCardDetails apiAccount, MappingContext context) {
                         apiAccount.setCcNumber(account.getCcNumber());
                         apiAccount.setCcType(account.getCcType());
-                        apiAccount.setClient(account.getClient());
                         apiAccount.setExpiryDate(account.getExpiryDate());
+                        apiAccount.setUsername(account.getClient().getUsername());
                     }
                 }).byDefault().toClassMap());
 
@@ -44,7 +44,6 @@ public class ModelMapper extends ConfigurableMapper {
                     public void mapAtoB(org.payment.api.CreditCardDetails apiAccount, CreditCardDetails account,   MappingContext context) {
                         account.setCcNumber(apiAccount.getCcNumber());
                         account.setCcType(apiAccount.getCcType());
-                        account.setClient(apiAccount.getClient());
                         account.setExpiryDate(apiAccount.getExpiryDate());
                     }
                 }).byDefault().toClassMap());
