@@ -93,6 +93,8 @@ public class ClientServiceImpl implements ClientService{
 
         if (creditCardDetailsSaved == null) {
             creditCardDetailsSaved = new org.payment.data.entities.CreditCardDetails();
+        } else {
+            creditCardDetails.setId(creditCardDetailsSaved.getId());
         }
 
         org.payment.data.entities.Client client = clientRepository.findByUsername(creditCardDetails.getUsername());

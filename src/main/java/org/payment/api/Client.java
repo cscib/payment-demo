@@ -1,5 +1,6 @@
 package org.payment.api;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.payment.data.entities.ClientRole;
 
@@ -20,13 +21,11 @@ public class Client implements Serializable {
     /** The client id */
     private Long clientId;
 
-    @NotNull
-    @NotEmpty
+    @NotBlank
     /** The username */
     private String username;
 
-    @NotNull
-    @NotEmpty
+    @NotBlank
     private String password;
 
     private Set<String> roles;

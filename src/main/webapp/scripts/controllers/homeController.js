@@ -19,6 +19,31 @@ controllers.controller("HomeController",
                 $scope.model.authdetails = null;
             })
 
+    loadCreditCards();
+
+    $scope.saveCreditCard = function () {
+
+          $http({
+              method: 'POST',
+              url: '/api/payment-system/creditcard/',
+              data: $scope.ccEditForm,
+          }).then(function (success){
+                $scope.errors = {};
+                loadCreditCards();
+          },function (error){
+                $scope.errors = error;
+          })
+    };
+
+      $scope.cancel = function () {
+          $modalInstance.dismiss('cancel');
+      };
+
+     /**
+       * Wrapper function to show alert in settings page
+       */
+      function loadCreditCards(){
+
         $http({
                 method: 'GET',
                 url: '/api/payment-system/clients/creditcarddetails/',
@@ -34,22 +59,6 @@ controllers.controller("HomeController",
                 }
             })
 
+      }
 
-    $scope.saveCreditCard = function () {
-
-          $http({
-              method: 'POST',
-              url: '/api/payment-system/creditcard/',
-              data: $scope.ccEditForm,
-          }).then(function (success){
-                $scope.errors = {};
-                //onSuccess();
-          },function (error){
-                $scope.errors = error;
-          })
-    };
-
-      $scope.cancel = function () {
-          $modalInstance.dismiss('cancel');
-      };
 }]);
