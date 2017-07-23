@@ -68,35 +68,31 @@
             </tr>
             </tbody>
         </table>
-        <button ng-click="create()" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> <span>Add Credit Card</span>
-        </button>
 
-        <h1>Add Credit Card</h1>
+        <h1>Add / Modify Credit Card</h1>
         <h4 style="color:red">{{errorMsg}}</h4>
+        <h4 style="color:green" ng-if="successMsg != null">{{successMsg}}</h4>
         <form id="ccEditForm" name="ccEditForm" autocomplete="false">
             <div class="modal-body" ng-show="ccEditForm">
 
                 <div class="form-group">
                     <label for="ccNumberInput">Credit Card Number</label>
                     <input type="text" class="form-control" id="ccNumberInput" ng-model="ccEditForm.ccNumber">
-                    <div field-validation-error-place-holder error="errors.fieldErrors.ccNumber"></div>
                 </div>
 
                 <div class="form-group">
                     <label for="ccTypeInput">Credit Card Type</label>
                     <input type="text"  class="form-control" id="ccTypeInput" ng-model="ccEditForm.ccType">
-                    <div field-validation-error-place-holder error="errors.fieldErrors.ccType"></div>
                 </div>
 
                 <div class="form-group">
                     <label for="expiryDateInput">Expiry Date</label>
                     <input type="text"  class="form-control" id="expiryDateInput" ng-model="ccEditForm.expiryDate">
-                    <div field-validation-error-place-holder error="errors.fieldErrors.expiryDate"></div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" ng-click="saveCreditCard()">Add Credit Card</button>
-                <button class="btn btn-warning" ng-click="alert('hello');cancel()">Cancel</button>
+                <button class="btn btn-primary" ng-click="saveCreditCard()">Add / Modify Credit Card</button>
+                <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
             </div>
         </form>
     </b>

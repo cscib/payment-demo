@@ -22,10 +22,10 @@ public class ControllerValidationHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public String processValidationError(MethodArgumentNotValidException ex) {
+    public Object processValidationError(MethodArgumentNotValidException ex) {
         BindingResult result = ex.getBindingResult();
         FieldError error = result.getFieldError();
-        return error.getDefaultMessage();
+        return error;
     }
 
     @ExceptionHandler(ClientNotFoundException.class)

@@ -21,17 +21,35 @@ controllers.controller("HomeController",
 
     loadCreditCards();
 
-    $scope.saveCreditCard = function () {
 
+    $scope.edit = function (creditcard) {
+        $scope.ccEditForm.ccNumber = creditcard.ccNumber;
+        $scope.ccEditForm.ccType = creditcard.ccType;
+        $scope.ccEditForm.expiryDate = creditcard.expiryDate;
+    }
+
+
+    $scope.cancel = function () {
+            $scope.ccEditForm = {};
+     };
+
+    $scope.saveCreditCard = function () {
           $http({
               method: 'POST',
               url: '/api/payment-system/creditcard/',
               data: $scope.ccEditForm,
           }).then(function (success){
                 $scope.errors = {};
+                $scope.successMsg = "Credit card created / modified successfully"
                 loadCreditCards();
           },function (error){
                 $scope.errors = error;
+                $scope.errorMsg = "Form error, please check your input and try again.";
+                                if (error != null && error.data != null && error.data.defaultMessage != null) {
+                                    $scope.errorMsg = error.data.defaultMessage;
+                                } else if (error != null && error.data != null && error.data.message != null) {
+                                    $scope.errorMsg = error.data.message;
+                                }
           })
     };
 
@@ -60,5 +78,6 @@ controllers.controller("HomeController",
             })
 
       }
+
 
 }]);

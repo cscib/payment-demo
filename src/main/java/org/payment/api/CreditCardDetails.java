@@ -27,7 +27,7 @@ public class CreditCardDetails  implements Serializable {
     @NotBlank(message = "Credit card type cannot be empty")
     private String ccType;
 
-    @NotBlank(message = "Invalid credit card expiry date")
+    @NotNull(message = "Invalid credit card expiry date")
     @JsonFormat(pattern="MM/yyyy")
     //@Future(message = "Credit card is expired")
     private Date expiryDate;

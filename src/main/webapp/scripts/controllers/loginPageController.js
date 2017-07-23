@@ -2,12 +2,6 @@ controllers.controller("LoginPageController", ['$rootScope', '$scope', '$http', 
 
    $scope.model = {};
 
-//      $http.get("/ws/users/groups/links").success(function(data) {
-//          $scope.model = data;
-//      });
-
-//      $scope.editedUser = user;
-
       $scope.saveUser = function () {
 
           $http({
@@ -27,8 +21,9 @@ controllers.controller("LoginPageController", ['$rootScope', '$scope', '$http', 
           })
       };
 
-      $scope.cancel = function () {
-          $modalInstance.dismiss('cancel');
-      };
+    $scope.cancel = function () {
+            $scope.editedUser = {};
+     };
+
 
 }]);
