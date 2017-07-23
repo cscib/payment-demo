@@ -41,6 +41,7 @@ controllers.controller("HomeController",
           }).then(function (success){
                 $scope.errors = {};
                 $scope.successMsg = "Credit card created / modified successfully"
+                $scope.ccEditForm = {};
                 loadCreditCards();
           },function (error){
                 $scope.errors = error;

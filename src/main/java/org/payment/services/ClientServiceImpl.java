@@ -8,6 +8,7 @@ import org.payment.data.repositories.CreditCardRepository;
 import org.payment.exceptions.ClientNotFoundException;
 import org.payment.exceptions.ClientUsernameExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ public class ClientServiceImpl implements ClientService{
     @Autowired
     private ModelMapper modelMapper;
 
+
     @Override
     public List<CreditCardDetails> getCreditCardDetailsForClient(Long clientId) throws ClientNotFoundException {
         org.payment.data.entities.Client client = clientRepository.findById(clientId).get();
@@ -43,6 +45,7 @@ public class ClientServiceImpl implements ClientService{
         return getCreditCardDetailsForClient(client);
     }
 
+    @PreAuthorize("#username == authentication.name")
     @Override
     public List<CreditCardDetails> getCreditCardDetailsForClient(String username) throws ClientNotFoundException {
         org.payment.data.entities.Client client = clientRepository.findByUsername(username);
@@ -67,7 +70,7 @@ public class ClientServiceImpl implements ClientService{
         return null;
     }
 
-
+    @PreAuthorize("#apiClient.username == authentication.name")
     public Client createClient(Client apiClient) throws ClientUsernameExistsException {
         // Add roles to apiClient
         Set roles = new TreeSet<String>();
@@ -86,6 +89,7 @@ public class ClientServiceImpl implements ClientService{
         return apiClient;
     }
 
+    @PreAuthorize("#creditCardDetails.username == authentication.name")
     @Override
     public CreditCardDetails createOrUpdateCreditCard(CreditCardDetails creditCardDetails) throws ClientNotFoundException {
 

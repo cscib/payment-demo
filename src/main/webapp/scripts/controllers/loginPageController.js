@@ -10,7 +10,7 @@ controllers.controller("LoginPageController", ['$rootScope', '$scope', '$http', 
               data: $scope.editedUser,
           }).then(function (success){
               $scope.errors = {};
-              $scope.errorMsg = null;
+              $scope.editedUser = {};
               $scope.successMsg = "User create successfully, please login"
           },function (error){
                $scope.errors = error;
