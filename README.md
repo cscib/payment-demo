@@ -26,12 +26,13 @@ The application has the following traits:
  - **Gradle**;
  - **jUnit**;
  - **Java Script** (**AngularJS, Bootstrap**, ajax, *plugins*);
- -  **Bower**
+ - **Bower**
 
 ### Quick setup:
 
  - Clone https://github.com/cscib/payment-demo
  - Run "bower install"
  - From Intellij run  PaymentDemoApplication
+ - Access login page http://localhost:8080/login.html
 
 

@@ -2,6 +2,8 @@ controllers.controller("LoginPageController", ['$rootScope', '$scope', '$http', 
 
    $scope.model = {};
 
+   $scope.error = $location.search()['error'];
+
       $scope.saveUser = function () {
 
           $http({
